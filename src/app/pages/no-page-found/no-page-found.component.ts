@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-no-page-found',
@@ -7,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoPageFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   year : number = new Date().getFullYear();
+
+  volver() : void{
+    this.router.navigate(['/dashboard']);
+  }
 
 }

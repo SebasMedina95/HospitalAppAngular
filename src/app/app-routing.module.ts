@@ -1,35 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'
+import { PagesRoutingModule } from './pages/pages.routing';
 
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { ProgressComponent } from './pages/progress/progress.component';
-import { Grafica1Component } from './pages/grafica1/grafica1.component';
 import { NoPageFoundComponent } from './pages/no-page-found/no-page-found.component';
-import { PagesGeneralComponent } from './pages/pages-general.component';
+import { AuthRoutingModule } from './auth/auth.routing';
 
 const routes : Routes = [
-  { 
-    /**Ruta general o ruta Padre
-     * Lo harémos de esta manera para separar el tema de los Templates.
-     */
-    path : '' , 
-    component : PagesGeneralComponent,
-    /**Rutas Hijas */
-    children: [
-      { path : 'dashboard' , component : DashboardComponent },
-      { path : 'progress' , component : ProgressComponent },
-      { path : 'grafica1' , component : Grafica1Component },
-      { path : '' , redirectTo : '/dashboard' , pathMatch : 'full' },
-    ] 
-  },
-
-
-  { path : 'register' , component : RegisterComponent },
-  { path : 'login' , component : LoginComponent },
-
+  //Lo demás viene importado con PagesRoutingModule y AuthRoutingModule.
+  { path : '' , redirectTo : '/dashboard' , pathMatch : 'full' },
   { path : '**' , component : NoPageFoundComponent },
+
 ];
 
 
@@ -38,7 +18,9 @@ const routes : Routes = [
 
   ],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    PagesRoutingModule, // Traemos las rutas hijas de las páginas.
+    AuthRoutingModule, // Traemos las rutas del Auth para el login y register
   ],
   exports: [
     RouterModule
